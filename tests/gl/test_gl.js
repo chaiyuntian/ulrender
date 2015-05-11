@@ -4,8 +4,8 @@
 
 describe("gl tests",function(){
     it("gl detect",function(){
-        var r = detect();
-        expect(r).toBeTruthy();
+
+        expect(detect()).toBeTruthy();
     });
     var cvs = document.createElement('canvas');
     var gl = GL(cvs);
