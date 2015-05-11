@@ -8,12 +8,11 @@ UL.shader = {FRAG:1,VERT:2};
 function detect(){
     try{
         var canvas = document.createElement('canvas');
-        return !!(window.WebGLRenderingContext
-        &&(canvas.canvas.getContext("webgl")||canvas.getContext("experimental-webgl")));
+        return !!(window.WebGLRenderingContext&&(canvas.getContext("webgl")||canvas.getContext("experimental-webgl")));
     }
     catch(e)
     {
-        UL.error("WebGL context is not available!");
+        UL.error("WebGL context is not available!"+ e.name + ":" +e.message);
         return false;
     }
 }
@@ -58,6 +57,11 @@ var Shader = function(gl,type,string){
     UL.log("Shader compile finished.");
     return shader;
 };
+
+
+
+var regex = /(attribute||uniform)[ ]+(i*vec[234]||mat[234]||float||bool) +([a-zA-Z][^;]*);/g;
+
 
 var shaderParser = function(str)
 {
